@@ -7,7 +7,7 @@ services:
   sqlserver-auth:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
@@ -17,7 +17,7 @@ services:
   sqlserver-course:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1434:1433"
@@ -27,7 +27,7 @@ services:
   sqlserver-lesson:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1435:1433"
@@ -37,7 +37,7 @@ services:
   sqlserver-enrollment:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1436:1433"
@@ -47,7 +47,7 @@ services:
   sqlserver-assessment:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1437:1433"
@@ -57,7 +57,7 @@ services:
   sqlserver-payment:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1438:1433"
@@ -67,7 +67,7 @@ services:
   sqlserver-progress:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1439:1433"
@@ -77,7 +77,7 @@ services:
   sqlserver-forum:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1440:1433"
@@ -87,7 +87,7 @@ services:
   sqlserver-notification:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "DOTLearn@123"
+      SA_PASSWORD: "DOTLearn123!"
       ACCEPT_EULA: "Y"
     ports:
       - "1441:1433"
@@ -117,7 +117,7 @@ services:
       - "5001:5001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-auth;Database=UserDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-auth;Database=UserDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -132,7 +132,7 @@ services:
       - "5002:5002"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-assessment;Database=AssessmentDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-assessment;Database=AssessmentDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -147,7 +147,7 @@ services:
       - "5003:5003"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-course;Database=CourseDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-course;Database=CourseDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -162,7 +162,7 @@ services:
       - "5004:5004"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-enrollment;Database=EnrollmentDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-enrollment;Database=EnrollmentDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -177,7 +177,7 @@ services:
       - "5005:5005"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-forum;Database=ForumDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-forum;Database=ForumDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -192,7 +192,7 @@ services:
       - "5006:5006"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-lesson;Database=ContentDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-lesson;Database=ContentDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -207,7 +207,7 @@ services:
       - "5007:5007"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-notification;Database=NotificationDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-notification;Database=NotificationDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -222,7 +222,7 @@ services:
       - "5008:5008"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-payment;Database=PaymentDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-payment;Database=PaymentDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:
@@ -237,7 +237,7 @@ services:
       - "5009:5009"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-progress;Database=ProgressDb;User Id=sa;Password=DOTLearn@123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=sqlserver-progress;Database=ProgressDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
       - AWS__ServiceURL=http://localstack:4566
       - AWS__Region=ap-south-1
     depends_on:

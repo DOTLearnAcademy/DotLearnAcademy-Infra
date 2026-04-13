@@ -36,10 +36,10 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=UserDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=UserDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       Jwt__Issuer: dotlearn-auth
       Jwt__Audience: dotlearn-api
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -49,8 +49,8 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CourseDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CourseDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -60,8 +60,8 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ContentDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ContentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -71,10 +71,10 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=EnrollmentDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=EnrollmentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -84,10 +84,10 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=PaymentDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=PaymentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
       SQS__PaymentFailedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-failed-dev"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -97,8 +97,8 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=AssessmentDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=AssessmentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -108,11 +108,11 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ProgressDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
-      ConnectionStrings__CertificateConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CertificateDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ProgressDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      ConnectionStrings__CertificateConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CertificateDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
       SQS__LessonCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-lesson-completed-dev"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -122,9 +122,9 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ForumDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ForumDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__NewReplyQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-new-reply-dev"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
 
@@ -134,13 +134,13 @@ services:
 
     environment:
       <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=NotificationDb;User Id=admin;Password=DOTLearn@123;TrustServerCertificate=True;ConnectionTimeout=30;"
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=NotificationDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
       SQS__NewReplyQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-new-reply-dev"
       SQS__CoursePublishedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-course-published-dev"
       SQS__PasswordResetRequestedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-password-reset-requested-dev"
       SES__SenderEmail: "noreply@dotlearn.com"
-      AllowedOrigins__Ec2: "http://3.27.174.183"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no

@@ -72,8 +72,9 @@ services:
     environment:
       <<: *common-env
       ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=EnrollmentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
-      SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
+      SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
+      Services__CourseServiceUrl: "http://course"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
@@ -85,7 +86,9 @@ services:
     environment:
       <<: *common-env
       ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=PaymentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
-      SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
+      Services__CourseServiceUrl: "http://course"
+      SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
+      SQS__NotificationPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-notification-payment-succeeded-dev"
       SQS__PaymentFailedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-failed-dev"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
@@ -135,7 +138,7 @@ services:
     environment:
       <<: *common-env
       ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=NotificationDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
-      SQS__PaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-succeeded-dev"
+      SQS__NotificationPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-notification-payment-succeeded-dev"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
       SQS__NewReplyQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-new-reply-dev"
       SQS__CoursePublishedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-course-published-dev"

@@ -111,7 +111,7 @@ services:
 
   auth:
     build:
-      context: ../dotlearn-auth
+      context: ../DotLearnAcademy-Auth
       dockerfile: Dockerfile
     ports:
       - "5001:5001"
@@ -126,7 +126,7 @@ services:
 
   assessment:
     build:
-      context: ../dotlearn-assessment
+      context: ../DotLearnAcademy-Assessment
       dockerfile: Dockerfile
     ports:
       - "5002:5002"
@@ -141,7 +141,7 @@ services:
 
   course:
     build:
-      context: ../dotlearn-course
+      context: ../DotLearnAcademy-Course
       dockerfile: Dockerfile
     ports:
       - "5003:5003"
@@ -156,7 +156,7 @@ services:
 
   enrollment:
     build:
-      context: ../dotlearn-enrollment
+      context: ../DotLearnAcademy-Enrollment
       dockerfile: Dockerfile
     ports:
       - "5004:5004"
@@ -171,7 +171,7 @@ services:
 
   forum:
     build:
-      context: ../dotlearn-forum
+      context: ../DotLearnAcademy-Forum
       dockerfile: Dockerfile
     ports:
       - "5005:5005"
@@ -186,7 +186,7 @@ services:
 
   lesson:
     build:
-      context: ../dotlearn-lesson
+      context: ../DotLearnAcademy-Lesson
       dockerfile: Dockerfile
     ports:
       - "5006:5006"
@@ -201,7 +201,7 @@ services:
 
   notification:
     build:
-      context: ../dotlearn-notification
+      context: ../DotLearnAcademy-Notification
       dockerfile: Dockerfile
     ports:
       - "5007:5007"
@@ -216,7 +216,7 @@ services:
 
   payment:
     build:
-      context: ../dotlearn-payment
+      context: ../DotLearnAcademy-Payment
       dockerfile: Dockerfile
     ports:
       - "5008:5008"
@@ -231,7 +231,7 @@ services:
 
   progress:
     build:
-      context: ../dotlearn-progress
+      context: ../DotLearnAcademy-Progress
       dockerfile: Dockerfile
     ports:
       - "5009:5009"
@@ -248,12 +248,12 @@ services:
 
   frontend:
     build:
-      context: ../dotlearn-frontend
+      context: ../DotLearnAcademy-Frontend/dotlearn-frontend
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
     volumes:
-      - ../dotlearn-frontend:/app
+      - ../DotLearnAcademy-Frontend/dotlearn-frontend:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development

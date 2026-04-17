@@ -91,6 +91,8 @@ services:
       SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
+      Razorpay__KeyId: "rzp_test_Sa98YF7g0425dq"
+      Razorpay__KeySecret: "RTSWBao0l5Fb9SHxr3dTpOa0"
     restart: no
 
   # ── Assessment Service ────────────────────────────────────────────

@@ -39,6 +39,7 @@ services:
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
       Jwt__PrivateKeyPath: "/app/keys/private.pem"
+      GoogleAuth__ClientId: "452138609086-7kru8489914ajokpt41duoivo53m0k53.apps.googleusercontent.com"
     volumes:
       - ./keys/private.pem:/app/keys/private.pem:ro
     restart: no

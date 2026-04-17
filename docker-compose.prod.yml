@@ -113,7 +113,9 @@ services:
       ConnectionStrings__CertificateConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CertificateDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
       SQS__LessonCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-lesson-completed-dev"
-      AWS__CertificatesBucket: "dotlearn-certificates"
+      AWS__CertificatesBucket: "dotlearn-certificates-prod"
+      Services__CourseService: "http://course"
+      Services__AuthService: "http://auth"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no

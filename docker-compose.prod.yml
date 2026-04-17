@@ -1,4 +1,3 @@
-version: "3.8"
 
 x-common-env: &common-env
   ASPNETCORE_ENVIRONMENT: Production
@@ -30,7 +29,7 @@ services:
 
   # ── Auth Service ─────────────────────────────────────────────────
   auth:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-auth:latest
+    image: dotlearn-auth:v8b
 
     environment:
       <<: *common-env
@@ -39,11 +38,14 @@ services:
       Jwt__Audience: dotlearn-api
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
+      Jwt__PrivateKeyPath: "/app/keys/private.pem"
+    volumes:
+      - ./keys/private.pem:/app/keys/private.pem:ro
     restart: no
 
   # ── Course Service ────────────────────────────────────────────────
   course:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-course:latest
+    image: dotlearn-course:v9b
 
     environment:
       <<: *common-env
@@ -54,7 +56,7 @@ services:
 
   # ── Lesson Service ────────────────────────────────────────────────
   lesson:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-lesson:latest
+    image: dotlearn-lesson:v3
 
     environment:
       <<: *common-env
@@ -65,7 +67,7 @@ services:
 
   # ── Enrollment Service ────────────────────────────────────────────
   enrollment:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-enrollment:latest
+    image: dotlearn-enrollment:v9b
 
     environment:
       <<: *common-env
@@ -79,15 +81,13 @@ services:
 
   # ── Payment Service ───────────────────────────────────────────────
   payment:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-payment:latest
+    image: dotlearn-payment:v14b
 
     environment:
       <<: *common-env
       ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=PaymentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       Services__CourseServiceUrl: "http://course"
       SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
-      SQS__NotificationPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-notification-payment-succeeded-dev"
-      SQS__PaymentFailedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-payment-failed-dev"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no
@@ -105,7 +105,7 @@ services:
 
   # ── Progress Service ──────────────────────────────────────────────
   progress:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-progress:latest
+    image: dotlearn-progress:fixed
 
     environment:
       <<: *common-env
@@ -113,6 +113,7 @@ services:
       ConnectionStrings__CertificateConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CertificateDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
       SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
       SQS__LessonCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-lesson-completed-dev"
+      AWS__CertificatesBucket: "dotlearn-certificates"
       AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
       AllowedOrigins__CloudFront: ""
     restart: no

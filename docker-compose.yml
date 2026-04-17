@@ -74,27 +74,7 @@ services:
     volumes:
       - sqlserver-progress-data:/var/opt/mssql
 
-  sqlserver-forum:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      SA_PASSWORD: "DOTLearn123!"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1440:1433"
-    volumes:
-      - sqlserver-forum-data:/var/opt/mssql
 
-  sqlserver-notification:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      SA_PASSWORD: "DOTLearn123!"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1441:1433"
-    volumes:
-      - sqlserver-notification-data:/var/opt/mssql
-
-  # ─── LOCALSTACK (simulates AWS) ─────────────────────────────────
 
   localstack:
     image: localstack/localstack:latest
@@ -169,21 +149,6 @@ services:
       - sqlserver-enrollment
       - localstack
 
-  forum:
-    build:
-      context: ../DotLearnAcademy-Forum
-      dockerfile: Dockerfile
-    ports:
-      - "5005:5005"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-forum;Database=ForumDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
-      - AWS__ServiceURL=http://localstack:4566
-      - AWS__Region=ap-south-1
-    depends_on:
-      - sqlserver-forum
-      - localstack
-
   lesson:
     build:
       context: ../DotLearnAcademy-Lesson
@@ -197,21 +162,6 @@ services:
       - AWS__Region=ap-south-1
     depends_on:
       - sqlserver-lesson
-      - localstack
-
-  notification:
-    build:
-      context: ../DotLearnAcademy-Notification
-      dockerfile: Dockerfile
-    ports:
-      - "5007:5007"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver-notification;Database=NotificationDb;User Id=sa;Password=DOTLearn123!;TrustServerCertificate=True
-      - AWS__ServiceURL=http://localstack:4566
-      - AWS__Region=ap-south-1
-    depends_on:
-      - sqlserver-notification
       - localstack
 
   payment:
@@ -274,9 +224,7 @@ services:
       - assessment
       - course
       - enrollment
-      - forum
       - lesson
-      - notification
       - payment
       - progress
 
@@ -290,6 +238,5 @@ volumes:
   sqlserver-assessment-data:
   sqlserver-payment-data:
   sqlserver-progress-data:
-  sqlserver-forum-data:
-  sqlserver-notification-data:
+
   localstack-data:

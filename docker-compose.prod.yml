@@ -25,8 +25,6 @@ services:
       - payment
       - assessment
       - progress
-      - forum
-      - notification
     restart: no
     mem_limit: 64m
 
@@ -119,31 +117,3 @@ services:
       AllowedOrigins__CloudFront: ""
     restart: no
 
-  # ── Forum Service ─────────────────────────────────────────────────
-  forum:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-forum:latest
-
-    environment:
-      <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ForumDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
-      SQS__NewReplyQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-new-reply-dev"
-      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
-      AllowedOrigins__CloudFront: ""
-    restart: no
-
-  # ── Notification Service ──────────────────────────────────────────
-  notification:
-    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-notification:latest
-
-    environment:
-      <<: *common-env
-      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=NotificationDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
-      SQS__NotificationPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-notification-payment-succeeded-dev"
-      SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
-      SQS__NewReplyQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-new-reply-dev"
-      SQS__CoursePublishedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-course-published-dev"
-      SQS__PasswordResetRequestedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-password-reset-requested-dev"
-      SES__SenderEmail: "noreply@dotlearn.com"
-      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
-      AllowedOrigins__CloudFront: ""
-    restart: no

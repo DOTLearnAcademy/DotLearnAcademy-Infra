@@ -1,0 +1,125 @@
+
+x-common-env: &common-env
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  AWS__Region: ap-southeast-2
+  Auth__JwksUri: http://auth/auth/.well-known/jwks.json
+
+services:
+
+  # ── Nginx Reverse Proxy + Angular SPA ───────────────────────────
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./dist:/usr/share/nginx/html:ro
+    depends_on:
+      - auth
+      - course
+      - lesson
+      - enrollment
+      - payment
+      - assessment
+      - progress
+    restart: no
+    mem_limit: 64m
+
+  # ── Auth Service ─────────────────────────────────────────────────
+  auth:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-auth:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=UserDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      Jwt__Issuer: dotlearn-auth
+      Jwt__Audience: dotlearn-api
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+      Jwt__PrivateKeyPath: "/app/keys/private.pem"
+      GoogleAuth__ClientId: "452138609086-7kru8489914ajokpt41duoivo53m0k53.apps.googleusercontent.com"
+    volumes:
+      - ./keys/private.pem:/app/keys/private.pem:ro
+    restart: no
+
+  # ── Course Service ────────────────────────────────────────────────
+  course:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-course:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CourseDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+    restart: no
+
+  # ── Lesson Service ────────────────────────────────────────────────
+  lesson:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-lesson:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ContentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+    restart: no
+
+  # ── Enrollment Service ────────────────────────────────────────────
+  enrollment:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-enrollment:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=EnrollmentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
+      SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
+      Services__CourseServiceUrl: "http://course"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+    restart: no
+
+  # ── Payment Service ───────────────────────────────────────────────
+  payment:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-payment:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=PaymentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      Services__CourseServiceUrl: "http://course"
+      SQS__EnrollmentPaymentSucceededQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-payment-succeeded-dev"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+      Razorpay__KeyId: "rzp_test_Sa98YF7g0425dq"
+      Razorpay__KeySecret: "RTSWBao0l5Fb9SHxr3dTpOa0"
+    restart: no
+
+  # ── Assessment Service ────────────────────────────────────────────
+  assessment:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-assessment:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=AssessmentDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+    restart: no
+
+  # ── Progress Service ──────────────────────────────────────────────
+  progress:
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-progress:latest
+
+    environment:
+      <<: *common-env
+      ConnectionStrings__DefaultConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=ProgressDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      ConnectionStrings__CertificateConnection: "Server=dotlearn-db.c7ge68ueyfep.ap-southeast-2.rds.amazonaws.com,1433;Database=CertificateDb;User Id=admin;Password=DOTLearn123!;TrustServerCertificate=True;Connection Timeout=30;"
+      SQS__EnrollmentCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-enrollment-completed-dev"
+      SQS__LessonCompletedQueue: "https://sqs.ap-southeast-2.amazonaws.com/358454003819/dotlearn-lesson-completed-dev"
+      AWS__CertificatesBucket: "dotlearn-certificates-prod"
+      Services__CourseService: "http://course"
+      Services__AuthService: "http://auth"
+      AllowedOrigins__Ec2: "http://3.27.174.183,http://3.27.174.183.nip.io"
+      AllowedOrigins__CloudFront: ""
+    restart: no
+

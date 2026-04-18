@@ -29,7 +29,7 @@ services:
 
   # ── Auth Service ─────────────────────────────────────────────────
   auth:
-    image: dotlearn-auth:v8b
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-auth:latest
 
     environment:
       <<: *common-env
@@ -46,7 +46,7 @@ services:
 
   # ── Course Service ────────────────────────────────────────────────
   course:
-    image: dotlearn-course:v9b
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-course:latest
 
     environment:
       <<: *common-env
@@ -57,7 +57,7 @@ services:
 
   # ── Lesson Service ────────────────────────────────────────────────
   lesson:
-    image: dotlearn-lesson:v3
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-lesson:latest
 
     environment:
       <<: *common-env
@@ -68,7 +68,7 @@ services:
 
   # ── Enrollment Service ────────────────────────────────────────────
   enrollment:
-    image: dotlearn-enrollment:v9b
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-enrollment:latest
 
     environment:
       <<: *common-env
@@ -82,7 +82,7 @@ services:
 
   # ── Payment Service ───────────────────────────────────────────────
   payment:
-    image: dotlearn-payment:v14b
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-payment:latest
 
     environment:
       <<: *common-env
@@ -108,7 +108,7 @@ services:
 
   # ── Progress Service ──────────────────────────────────────────────
   progress:
-    image: dotlearn-progress:fixed
+    image: 358454003819.dkr.ecr.ap-southeast-2.amazonaws.com/dotlearn-progress:latest
 
     environment:
       <<: *common-env
